@@ -1,0 +1,12 @@
+{
+  "name": "sistema-media-escolar",
+  "version": "1.0.0",
+  "description": "Sistema para calcular media de alunos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.22.2"
+  }
+}
