@@ -35,16 +35,12 @@
             </tr>
         </thead>
         <tbody id="corpoTabela">
-            <tr>
-                <td colspan="5" style="text-align: center;">Nenhum aluno cadastrado</td>
-            </tr>
         </tbody>
     </table>
 
     <script>
         let alunos = [];
 
-        
         function carregarDados() {
             const dadosSalvos = localStorage.getItem('alunos');
             if (dadosSalvos) {
@@ -53,47 +49,35 @@
             }
         }
 
-        
         function calcularMedia(nota1, nota2) {
             return (nota1 + nota2) / 2;
         }
 
-        
         function definirSituacao(media) {
-            if (media >= 6) {
-                return 'Aprovado';
-            } else if (media >= 2) {
-                return 'Exame Final';
-            } else {
-                return 'Reprovado';
-            }
+            if (media >= 6) return 'Aprovado.';
+            if (media >= 2) return 'Exame Final.';
+            return 'Reprovado.';
         }
 
-        
         function adicionarAluno(nome, nota1, nota2) {
             const media = calcularMedia(nota1, nota2);
-            const situacao = definirSituacao(media);
-            
             const aluno = {
                 id: Date.now(),
                 nome: nome,
                 nota1: nota1,
                 nota2: nota2,
                 media: media,
-                situacao: situacao
+                situacao: definirSituacao(media)
             };
-            
             alunos.push(aluno);
             salvarLocalStorage();
             exibirTabela();
         }
 
-        
         function salvarLocalStorage() {
             localStorage.setItem('alunos', JSON.stringify(alunos));
         }
 
-        
         function exibirTabela() {
             const corpoTabela = document.getElementById('corpoTabela');
             corpoTabela.innerHTML = '';
@@ -114,7 +98,6 @@
             }
         }
 
-        
         document.getElementById('formAluno').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -139,16 +122,12 @@
             
             adicionarAluno(nome, nota1, nota2);
             
-            
             document.getElementById('nome').value = '';
             document.getElementById('nota1').value = '';
             document.getElementById('nota2').value = '';
-            
-            
             document.getElementById('nome').focus();
         });
 
-        
         carregarDados();
     </script>
 </body>
